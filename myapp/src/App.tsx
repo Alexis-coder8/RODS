@@ -1,12 +1,17 @@
+class Person {
+  name!: string;
+  age!: number;
+  isStudent!: boolean;
+}
+
 function App() {
- let isStudent: boolean = true;
  const name: string = "Alexis";
  let age : number = 16;
- 
+ let isStudent: boolean = true;
  let colors:string[] = ["pink", "orange","purple"]
 
  let student= new Person();
- 
+
  student.name = name;
  student.age = age;
  student.isStudent = isStudent
@@ -18,13 +23,64 @@ function App() {
   { name: "Isaac", age: 19, isStudent: false },
  ]
   
- return "HELLO LEXY"
-}
+ let message: string = "Start";
 
-class Person {
-  name!: string;
-  age!: number;
-  isStudent!: boolean;
+  let score: number = 50;
+
+  if (score >= 60) {
+    message = "Pass"
+  } else {
+    message = "try again"
+  }
+   let isActive: boolean = false;
+
+   while (isActive) {
+    message = "loop"
+    isActive = false;
+  }
+ let loops : number = 0;
+ for(; loops < 3;) {
+ loops= loops + 1
+ }
+ //Loop #1 - start --> Loops = 0, 0 < 3 = true, end --> loops = 1
+  //Loop #2 - start --> Loops = 1, 1 < 3 = true, end --> loops = 2
+  //Loop #3 - start --> Loops = 2, 2 < 3 = true, end --> loops = 3
+  //Loop #4 - start --> Loops = 3, 3 < 3 = false, end --> loops = 3
+ 
+  return String (loops)
+
+  let sum: number = Multiply(8,7)
+  return String(sum)
+
+
+ function Multiply (number1 : number, number2: number) :number {
+  return number1 * number2;
+ }
+  function printScore(parameter: string) :string {
+  try {
+
+    let score: number = Number(parameter);
+
+    if (isNaN(score)) {
+
+      throw new Error("Error – not a number");
+
+    }
+
+    return String(score);
+
+  } catch (error) {
+
+    return String(error);
+
+  }
+
+
+
+
+
+  return message
+ return people[0].name
 }
 
 export default App;
