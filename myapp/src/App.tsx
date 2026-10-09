@@ -51,9 +51,29 @@ function App() {
 
   let sum: number = Multiply(8,7)
   return String(sum)
+  
+     return (
 
+    <div>
 
- function Multiply (number1 : number, number2: number) :number {
+      <div>
+
+        <label>Name: </label>
+
+        <input></input>
+
+      </div>
+
+      <div>
+
+        Hello World
+
+      </div>
+
+    </div>
+
+  )
+function Multiply (number1 : number, number2: number) :number {
   return number1 * number2;
  }
   function printScore(parameter: string) :string {
@@ -63,16 +83,16 @@ function App() {
 
     if (isNaN(score)) {
 
-      throw new Error("Error – not a number");
-
+      throw new Error("Error not a number");
     }
-
-    return String(score);
-
-  } catch (error) {
-
-    return String(error);
-
+  return printScore("50")
+  }
+   catch (Error) {
+   return "invalid score";
+   }
+  } 
+    return String(Error);
+  
   }
 
 
