@@ -47,11 +47,10 @@ function App() {
   //Loop #3 - start --> Loops = 2, 2 < 3 = true, end --> loops = 3
   //Loop #4 - start --> Loops = 3, 3 < 3 = false, end --> loops = 3
  
-  return String (loops)
+  
 
   let sum: number = Multiply(8,7)
-  return String(sum)
-  
+
      return (
 
     <div>
