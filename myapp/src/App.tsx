@@ -123,7 +123,7 @@ function App() {
       </div>
 
       <div style={{ marginTop: "20px" }}>
-        Hello Alexis
+        Hello {selectedName}
       </div>
 
       <div style={{ marginTop: "20px" }}>
