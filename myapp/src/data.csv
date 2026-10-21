@@ -1,4 +1,13 @@
 name,age,isStudent
-Alexis,16,true
-Jane,16,false
-Isaac,19,false
+
+Alexis,16,1
+
+Alice,24,0
+
+Jason,17,0
+
+Kevin,71,1
+
+
+
+
