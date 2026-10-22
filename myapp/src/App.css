@@ -9,7 +9,7 @@ form {
 }
 button { 
   color: white;
-  background: darkred;
+  background: rgb(80, 9, 65);
 }
 button:hover {
   background: orange;
@@ -24,6 +24,32 @@ input, select {
   padding: 5px;
   margin: 5px;
 }
+input, select {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid silver;
+  border-radius: 10px;
+}
+table {
+  width: 100%;
+}
+th, td {
+  border: 1px solid black;
+  text-align: center;
+}
+td {
+
+border: 1px solid black;
+
+text-align: left;
+}
+
+
+
+
+
+
+
 
 
 
