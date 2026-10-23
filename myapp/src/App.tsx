@@ -1,8 +1,13 @@
 //Library Imports
-import csvText from "./data.csv?raw"; //Raw CSV data file
 import Papa from "papaparse"; //External library used for reading CSVs
 import { useState } from "react"; //State allows us to update UI when data changes
 import "./App.css"; //Use our style file
+import csvText from "./movies.csv?raw";
+import logo from "./logo.png"; // Logo image file
+
+
+
+
 
 
 //Web App's Default Page
@@ -14,36 +19,46 @@ function App() {
   ).data;
 
   //Fill the contents of the CSV into a table variable
-  let people: Person[] = [];
+  let movies: Movie[] = [];
 
   //Loop once for each data row in the CSV file
   for (let loop: number = 0; loop < csvArray.length; loop++) {
     //Store the contents of the current row
     let row = csvArray[loop];
 
-    //Convert the row's contents into a Person object
-    let person = new Person();
-    person.name = row.name;
-    person.age = row.age;
-    person.isStudent = Boolean(Number(row.isStudent));
+    //Convert the row's contents into a Movie object
+    let movie = new Movie();
+    movie.rank = row.Rank;
+    movie.title = row.Title;
+    movie.genre = row.Genre;
+    movie.description = row.Description;
+    movie.director = row.Director;
+    movie.actors = row.Actors;
+    movie.year = row.Year;
+    movie.runtimeMinutes = row["Runtime (Minutes)"];
+    movie.rating = row.Rating;
+    movie.votes = row.Votes;
+    movie.revenueMillions = row["Revenue (Millions)"];
+    movie.metascore = row.Metascore;
    
-    //Add the Person object into the People array
-    people.push(person);
+    //Add the Movie object into the Movies array
+    movies.push(movie);
   }
 
-  //Search by name
-  let findAlexis = people.find(p => p.name === "Alexis")!;
+  //Search by title
+  let findMovie = movies.find(m => m.title === "The Shawshank Redemption")!;
 
-  // Find Students (Is Student = Yes)
-  let students = people.filter(p => Boolean(Number(p.isStudent)));
+  // Find Movies with a rating above 8.0
+  let above8 = movies.filter(m => m.rating > 8.0);
+  
 
-  //Filter by Names with the letter O
-  let oNames = people.filter(p => p.name.toLowerCase().includes("o"));
+  //Filter by Titles with the letter O
+  let oNames = movies.filter(m => m.title.toLowerCase().includes("o"));
 
-  //Create a new State Variable that stores the selected person's name
+  //Create a new State Variable that stores the selected movie's title
   //setSelectedName is the built-in function that updates the variable
-  //"Alexis" is the default value
-  let [selectedName, setSelectedName] = useState("Alexis");
+  //"The Shawshank Redemption" is the default value
+  let [selectedName, setSelectedName] = useState("The Shawshank Redemption");
 
   //Event Handler when the People drop down gets a different selected name
   function handleNameChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -64,18 +79,17 @@ function App() {
   //UI
   return (
     <form onSubmit={Display}>
-      {
-      // Return a form as the main component of the web app
-      // Run the Display function when two things happen:
-      // 1. The Submit button is pushed
-      // 2. All the form's validation rules are met
-      }
+<div style={{ display: "flex", justifyContent: "center" }}>
+
+        <img src={logo} style={{ width: "300px", height: "150px" }} />
+
+      </div>
       <div>
         <label>Name: </label>
         <input id="name"></input>
       </div>
       <div>
-        <label>Age:</label>
+        <label>Year:</label>
         <input id="age" type="number" min="0" max="100" required></input>
       </div>
       <br />
@@ -87,20 +101,20 @@ function App() {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Is Student</th>
+              <th>Title</th>
+              <th>Year</th>
+              <th>Rating</th>
             </tr>
           </thead>
 
           <tbody>
            
-            {//Display the contents of the People array in a new table
-            people.map((person, loop) => (
+            {//Display the contents of the Movies array in a new table
+            movies.map((movie, loop) => (
               <tr key={loop}>
-                <td>{person.name}</td>
-                <td>{person.age}</td>
-                <td>{person.isStudent ? "Yes" : "No"}</td>
+                <td>{movie.title}</td>
+                <td>{movie.year}</td>
+                <td>{movie.rating}</td>
               </tr>
             ))}
           </tbody>
@@ -108,13 +122,13 @@ function App() {
       </div>
       <br />
       <div>
-            <label>Search by name results: </label>{findAlexis.age}
+            <label>Search by title results: </label>{findMovie.title}
       </div>
       <div>
-            <label>Number of students: </label>{students.length}
+            <label>Number of movies with rating above 8.0: </label>{above8.length}
       </div>
       <div>
-            <label>Number of names with the letter O: </label>{oNames.length}
+            <label>Number of titles with the letter O: </label>{oNames.length}
       </div>
       <br />
        <div>
@@ -127,28 +141,52 @@ function App() {
           onChange={handleNameChange}
           >
             {//Map the Names in the People array to the select dropdown
-            people.map(p => (
-              <option key={p.name}
-                  value={p.name}>
-                  {p.name}
+            movies.map(m => (
+              <option key={m.title}
+                  value={m.title}>
+                  {m.title}
               </option>
             ))}
           </select>
       </div>
        <div>
-            <label>Selected Age: </label>{people.find(p => p.name === selectedName)?.age}
+            <label>Selected Year: </label>{movies.find(m => m.title === selectedName)?.year}
       </div>
       <div>
-            <label>Selected Is Student: </label>{people.find(p => p.name === selectedName)?.isStudent ? "Yes" : "No"}
+            <label>Selected Rating: </label>{movies.find(m => m.title === selectedName)?.rating}
       </div>
     </form>
   )
 }
 
 export default App;
+ 
 
-class Person {
-  name!: string;
-  age!: number;
-  isStudent!: boolean;
+
+
+//Rank,Title,Genre,Description,Director,Actors,Year,Runtime (Minutes),Rating,Votes,Revenue (Millions),Metascore
+class Movie {
+  rank!: string;
+  title!: string;
+  genre!: string;
+  description!: string;
+  director!: string;
+  actors!: string;
+  year!: string;
+  runtimeMinutes!: string;
+  rating!: string;
+  votes!: string;
+  revenueMillions!: string;
+  metascore!: string;
 }
+
+
+
+
+
+
+
+
+
+
+
