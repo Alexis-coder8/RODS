@@ -52,7 +52,8 @@ function App() {
   // Find Movies with a rating above 8.0
   let above8 = movies.filter(m => Number(m.rating) > 8.0);
 
-  //Filter by Titles with the letter O
+  //Filter by Titles with the letter a and o
+  let aNames = movies.filter(m => m.title.toLowerCase().includes("a"));
   let oNames = movies.filter(m => m.title.toLowerCase().includes("o"));
 
   //Create a new State Variable that stores the selected movie's title
@@ -68,10 +69,10 @@ function App() {
   //Display the entered name and year in a pop up
   function Display() {
     let name = document.querySelector<HTMLInputElement>("#visitor-name");
-    let age = document.querySelector<HTMLInputElement>("#visitor-age");
+    let year = document.querySelector<HTMLInputElement>("#visitor-age");
 
-    if (name && age) {
-        alert("Name: " + name.value + " - Age: " + age.value);
+    if (name && year) {
+        alert("Name: " + name.value + " - Year: " + year.value);
     }
   }
 
@@ -86,8 +87,8 @@ function App() {
         <input id="visitor-name" name="name" />
       </div>
       <div>
-        <label htmlFor="visitor-age">Year:</label>
-        <input id="visitor-age" name="age" type="number" min="0" max="100" required />
+        <label htmlFor="visitor-year">Year:</label>
+        <input id="visitor-year" name="year" type="number" min="2005" max="2023" required />
       </div>
       <br />
       <div>
@@ -125,6 +126,9 @@ function App() {
       </div>
       <div>
         <label>Number of titles with the letter O: </label>{oNames.length}
+      </div>
+      <div>
+        <label>Number of titles with the letter A: </label>{aNames.length}
       </div>
       <br />
       <div>
