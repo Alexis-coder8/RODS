@@ -60,16 +60,15 @@ function App() {
   //Use the first available movie title as a safe default
   let [selectedName, setSelectedName] = useState(defaultMovieTitle);
 
-  //Event Handler when the People drop down gets a different selected name
+  //Update the selected movie when the dropdown changes
   function handleNameChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    //Update the selectedName State Variable
     setSelectedName(event.target.value);
   }
 
-  //Display the Name and Age input in a pop up
+  //Display the entered name and year in a pop up
   function Display() {
-    let name = document.querySelector<HTMLInputElement>("#name");
-    let age = document.querySelector<HTMLInputElement>("#age");
+    let name = document.querySelector<HTMLInputElement>("#visitor-name");
+    let age = document.querySelector<HTMLInputElement>("#visitor-age");
 
     if (name && age) {
         alert("Name: " + name.value + " - Age: " + age.value);
@@ -78,26 +77,24 @@ function App() {
 
   //UI
   return (
-    <form onSubmit={Display}>
-<div style={{ display: "flex", justifyContent: "center" }}>
-
-        <img src={logo} style={{ width: "300px", height: "150px" }} />
-
+    <form className="movie-app" onSubmit={(event) => { event.preventDefault(); Display(); }}>
+      <div className="logo-container">
+        <img src={logo} className="app-logo" alt="RODS" />
       </div>
       <div>
-        <label>Name: </label>
-        <input id="name"></input>
+        <label htmlFor="visitor-name">Name: </label>
+        <input id="visitor-name" name="name" />
       </div>
       <div>
-        <label>Year:</label>
-        <input id="age" type="number" min="0" max="100" required></input>
+        <label htmlFor="visitor-age">Year:</label>
+        <input id="visitor-age" name="age" type="number" min="0" max="100" required />
       </div>
       <br />
       <div>
         <button type="submit">Submit</button>
       </div>
       <br />
-      <div>
+      <div className="table-wrap">
         <table>
           <thead>
             <tr>
@@ -109,8 +106,7 @@ function App() {
 
           <tbody>
            
-            {//Display the contents of the Movies array in a new table
-            movies.map((movie, loop) => (
+            {movies.map((movie, loop) => (
               <tr key={loop}>
                 <td>{movie.title}</td>
                 <td>{movie.year}</td>
@@ -122,38 +118,32 @@ function App() {
       </div>
       <br />
       <div>
-            <label>Search by title results: </label>{findMovie.title}
+        <label>Search by title results: </label>{findMovie.title}
       </div>
       <div>
-            <label>Number of movies with rating above 8.0: </label>{above8.length}
+        <label>Number of movies with rating above 8.0: </label>{above8.length}
       </div>
       <div>
-            <label>Number of titles with the letter O: </label>{oNames.length}
+        <label>Number of titles with the letter O: </label>{oNames.length}
       </div>
       <br />
-       <div>
-          <label>People: </label>
-          {
-          // Create a new drop down connected to our State Variable and event handler
-          }
-          <select id="name"
+      <div>
+        <label htmlFor="movie-select">People: </label>
+        <select
+          id="movie-select"
           value={selectedName}
           onChange={handleNameChange}
-          >
-            {//Map the Names in the People array to the select dropdown
-            movies.map(m => (
-              <option key={m.title}
-                  value={m.title}>
-                  {m.title}
-              </option>
-            ))}
-          </select>
-      </div>
-       <div>
-            <label>Selected Year: </label>{movies.find(m => m.title === selectedName)?.year}
+        >
+          {movies.map(m => (
+            <option key={m.title} value={m.title}>{m.title}</option>
+          ))}
+        </select>
       </div>
       <div>
-            <label>Selected Rating: </label>{movies.find(m => m.title === selectedName)?.rating}
+        <label>Selected Year: </label>{movies.find(m => m.title === selectedName)?.year}
+      </div>
+      <div>
+        <label>Selected Rating: </label>{movies.find(m => m.title === selectedName)?.rating}
       </div>
     </form>
   )
@@ -179,9 +169,6 @@ class Movie {
   revenueMillions!: string;
   metascore!: string;
 }
-
-
-
 
 
 

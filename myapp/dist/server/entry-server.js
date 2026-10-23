@@ -41,29 +41,38 @@ function App() {
 		setSelectedName(event.target.value);
 	}
 	function Display() {
-		let name = document.querySelector("#name");
-		let age = document.querySelector("#age");
+		let name = document.querySelector("#visitor-name");
+		let age = document.querySelector("#visitor-age");
 		if (name && age) alert("Name: " + name.value + " - Age: " + age.value);
 	}
 	return /* @__PURE__ */ jsxs("form", {
-		onSubmit: Display,
+		className: "movie-app",
+		onSubmit: (event) => {
+			event.preventDefault();
+			Display();
+		},
 		children: [
 			/* @__PURE__ */ jsx("div", {
-				style: {
-					display: "flex",
-					justifyContent: "center"
-				},
+				className: "logo-container",
 				children: /* @__PURE__ */ jsx("img", {
 					src: logo_default,
-					style: {
-						width: "300px",
-						height: "150px"
-					}
+					className: "app-logo",
+					alt: "RODS"
 				})
 			}),
-			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Name: " }), /* @__PURE__ */ jsx("input", { id: "name" })] }),
-			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Year:" }), /* @__PURE__ */ jsx("input", {
-				id: "age",
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+				htmlFor: "visitor-name",
+				children: "Name: "
+			}), /* @__PURE__ */ jsx("input", {
+				id: "visitor-name",
+				name: "name"
+			})] }),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+				htmlFor: "visitor-age",
+				children: "Year:"
+			}), /* @__PURE__ */ jsx("input", {
+				id: "visitor-age",
+				name: "age",
 				type: "number",
 				min: "0",
 				max: "100",
@@ -75,22 +84,28 @@ function App() {
 				children: "Submit"
 			}) }),
 			/* @__PURE__ */ jsx("br", {}),
-			/* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("table", { children: [/* @__PURE__ */ jsx("thead", { children: /* @__PURE__ */ jsxs("tr", { children: [
-				/* @__PURE__ */ jsx("th", { children: "Title" }),
-				/* @__PURE__ */ jsx("th", { children: "Year" }),
-				/* @__PURE__ */ jsx("th", { children: "Rating" })
-			] }) }), /* @__PURE__ */ jsx("tbody", { children: movies.map((movie, loop) => /* @__PURE__ */ jsxs("tr", { children: [
-				/* @__PURE__ */ jsx("td", { children: movie.title }),
-				/* @__PURE__ */ jsx("td", { children: movie.year }),
-				/* @__PURE__ */ jsx("td", { children: movie.rating })
-			] }, loop)) })] }) }),
+			/* @__PURE__ */ jsx("div", {
+				className: "table-wrap",
+				children: /* @__PURE__ */ jsxs("table", { children: [/* @__PURE__ */ jsx("thead", { children: /* @__PURE__ */ jsxs("tr", { children: [
+					/* @__PURE__ */ jsx("th", { children: "Title" }),
+					/* @__PURE__ */ jsx("th", { children: "Year" }),
+					/* @__PURE__ */ jsx("th", { children: "Rating" })
+				] }) }), /* @__PURE__ */ jsx("tbody", { children: movies.map((movie, loop) => /* @__PURE__ */ jsxs("tr", { children: [
+					/* @__PURE__ */ jsx("td", { children: movie.title }),
+					/* @__PURE__ */ jsx("td", { children: movie.year }),
+					/* @__PURE__ */ jsx("td", { children: movie.rating })
+				] }, loop)) })] })
+			}),
 			/* @__PURE__ */ jsx("br", {}),
 			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Search by title results: " }), findMovie.title] }),
 			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Number of movies with rating above 8.0: " }), above8.length] }),
 			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Number of titles with the letter O: " }), oNames.length] }),
 			/* @__PURE__ */ jsx("br", {}),
-			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "People: " }), /* @__PURE__ */ jsx("select", {
-				id: "name",
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+				htmlFor: "movie-select",
+				children: "People: "
+			}), /* @__PURE__ */ jsx("select", {
+				id: "movie-select",
 				value: selectedName,
 				onChange: handleNameChange,
 				children: movies.map((m) => /* @__PURE__ */ jsx("option", {

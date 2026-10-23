@@ -1,68 +1,69 @@
+.movie-app {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #716a79;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.app-logo {
+  width: 300px;
+  height: 150px;
+  object-fit: contain;
+}
+
 label {
-  color: purple;
+  color: #716a79;
 }
-label {
-  color: darkblue;
+
+button {
+  border: 0;
+  border-radius: 8px;
+  background: #88729e;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
 }
-form {
-  background-color:rgba(182, 50, 243, 0.884);
-}
-button { 
-  color: white;
-  background: rgb(80, 9, 65);
-}
+
 button:hover {
-  background: orange;
+  background: #756487;
 }
+
 input:focus-visible,
 button:focus-visible,
 select:focus-visible {
-  outline: 1px solid red;
-  outline-offset: 1px;
+  outline: 2px solid #88729e;
+  outline-offset: 2px;
 }
-input, select {
-  padding: 5px;
+
+input,
+select {
   margin: 5px;
-}
-input, select {
   padding: 5px;
-  margin: 5px;
-  border: 2px solid silver;
-  border-radius: 10px;
+  border: 1px solid #cfc5d8;
+  border-radius: 8px;
+  background: #fff;
+  color: #716a79;
 }
+
+.table-wrap {
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
+  border-collapse: collapse;
 }
-th, td {
-  border: 1px solid black;
-  text-align: center;
-}
+
+th,
 td {
-
-border: 1px solid black;
-
-text-align: center;
+  border: 1px solid #cfc5d8;
+  padding: 6px;
+  text-align: center;
+  color: #716a79;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
