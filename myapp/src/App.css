@@ -48,7 +48,7 @@ select {
   border: 1px solid #cfc5d8;
   border-radius: 8px;
   background: #fff;
-  color: #716a79;
+  color: rgb(35, 31, 31);
 }
 
 .table-wrap {
@@ -62,8 +62,8 @@ table {
 
 th,
 td {
-  border: 1px solid #cfc5d8;
+  border: 2px solid black;
   padding: 6px;
   text-align: center;
-  color: #716a79;
+  color: #000;
 }
