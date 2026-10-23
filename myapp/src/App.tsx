@@ -45,20 +45,20 @@ function App() {
     movies.push(movie);
   }
 
-  //Search by title
-  let findMovie = movies.find(m => m.title === "The Shawshank Redemption")!;
+  //Search by title using a valid default in case the requested title is missing
+  const defaultMovieTitle = movies[0]?.title ?? "The Dark Knight";
+  const findMovie = movies.find(m => m.title === "The Shawshank Redemption") ?? movies[0] ?? { title: defaultMovieTitle };
 
   // Find Movies with a rating above 8.0
-  let above8 = movies.filter(m => m.rating > 8.0);
-  
+  let above8 = movies.filter(m => Number(m.rating) > 8.0);
 
   //Filter by Titles with the letter O
   let oNames = movies.filter(m => m.title.toLowerCase().includes("o"));
 
   //Create a new State Variable that stores the selected movie's title
   //setSelectedName is the built-in function that updates the variable
-  //"The Shawshank Redemption" is the default value
-  let [selectedName, setSelectedName] = useState("The Shawshank Redemption");
+  //Use the first available movie title as a safe default
+  let [selectedName, setSelectedName] = useState(defaultMovieTitle);
 
   //Event Handler when the People drop down gets a different selected name
   function handleNameChange(event: React.ChangeEvent<HTMLSelectElement>) {
