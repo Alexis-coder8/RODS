@@ -28,6 +28,30 @@ body {
   margin: 0;
 }
 
+body::before,
+body::after {
+  position: fixed;
+  z-index: 0;
+  color: rgba(137, 111, 160, 0.24);
+  font-size: 76px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+body::before {
+  content: "✿";
+  top: 24px;
+  right: 24px;
+}
+
+body::after {
+  content: "❀";
+  bottom: 24px;
+  left: 24px;
+}
+
 #root {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
 }
