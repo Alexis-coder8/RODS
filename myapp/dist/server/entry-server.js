@@ -10,14 +10,14 @@ var logo_default = "/assets/logo-CI-Lc3gv.png";
 //#endregion
 //#region src/App.tsx
 function App() {
-	const csvArray = Papa.parse(movies_default, {
+	let csvArray = Papa.parse(movies_default, {
 		header: true,
 		skipEmptyLines: true
 	}).data;
-	const movies = [];
+	let movies = [];
 	for (let loop = 0; loop < csvArray.length; loop++) {
-		const row = csvArray[loop];
-		const movie = new Movie();
+		let row = csvArray[loop];
+		let movie = new Movie();
 		movie.rank = row.Rank;
 		movie.title = row.Title;
 		movie.genre = row.Genre;
@@ -34,177 +34,94 @@ function App() {
 	}
 	const defaultMovieTitle = movies[0]?.title ?? "The Dark Knight";
 	const findMovie = movies.find((m) => m.title === "The Shawshank Redemption") ?? movies[0] ?? { title: defaultMovieTitle };
-	const above8 = movies.filter((m) => Number(m.rating) > 8);
-	const aNames = movies.filter((m) => m.title.toLowerCase().includes("a"));
-	const oNames = movies.filter((m) => m.title.toLowerCase().includes("o"));
-	const [selectedName, setSelectedName] = useState(defaultMovieTitle);
-	const selectedMovie = movies.find((m) => m.title === selectedName) ?? findMovie;
+	let above8 = movies.filter((m) => Number(m.rating) > 8);
+	let aNames = movies.filter((m) => m.title.toLowerCase().includes("a"));
+	let oNames = movies.filter((m) => m.title.toLowerCase().includes("o"));
+	let [selectedName, setSelectedName] = useState(defaultMovieTitle);
 	function handleNameChange(event) {
 		setSelectedName(event.target.value);
 	}
 	function Display() {
-		const name = document.querySelector("#visitor-name");
-		const year = document.querySelector("#visitor-age");
+		let name = document.querySelector("#visitor-name");
+		let year = document.querySelector("#visitor-age");
 		if (name && year) alert("Name: " + name.value + " - Year: " + year.value);
 	}
-	return /* @__PURE__ */ jsx("form", {
+	return /* @__PURE__ */ jsxs("form", {
 		className: "movie-app",
 		onSubmit: (event) => {
 			event.preventDefault();
 			Display();
 		},
-		children: /* @__PURE__ */ jsxs("div", {
-			className: "movie-shell",
-			children: [
-				/* @__PURE__ */ jsxs("header", {
-					className: "movie-hero",
-					children: [/* @__PURE__ */ jsx("div", {
-						className: "logo-wrap",
-						children: /* @__PURE__ */ jsx("img", {
-							src: logo_default,
-							className: "app-logo",
-							alt: "RODS"
-						})
-					}), /* @__PURE__ */ jsxs("div", {
-						className: "hero-copy",
-						children: [
-							/* @__PURE__ */ jsx("p", {
-								className: "eyebrow",
-								children: "Cinema tracker"
-							}),
-							/* @__PURE__ */ jsx("h1", { children: "RODS Movie Vault" }),
-							/* @__PURE__ */ jsx("p", { children: "A bold little spotlight for your favorite films, ratings, and all the must-watch picks in one place." })
-						]
-					})]
-				}),
-				/* @__PURE__ */ jsxs("section", {
-					className: "stats-grid",
-					"aria-label": "Movie stats overview",
-					children: [
-						/* @__PURE__ */ jsxs("div", {
-							className: "stat-card",
-							children: [/* @__PURE__ */ jsx("span", { children: "Total titles" }), /* @__PURE__ */ jsx("strong", { children: movies.length })]
-						}),
-						/* @__PURE__ */ jsxs("div", {
-							className: "stat-card accent",
-							children: [/* @__PURE__ */ jsx("span", { children: "8.0+ rated" }), /* @__PURE__ */ jsx("strong", { children: above8.length })]
-						}),
-						/* @__PURE__ */ jsxs("div", {
-							className: "stat-card",
-							children: [/* @__PURE__ */ jsx("span", { children: "Contains O" }), /* @__PURE__ */ jsx("strong", { children: oNames.length })]
-						}),
-						/* @__PURE__ */ jsxs("div", {
-							className: "stat-card",
-							children: [/* @__PURE__ */ jsx("span", { children: "Contains A" }), /* @__PURE__ */ jsx("strong", { children: aNames.length })]
-						})
-					]
-				}),
-				/* @__PURE__ */ jsxs("section", {
-					className: "panel-grid",
-					children: [/* @__PURE__ */ jsxs("div", {
-						className: "panel form-panel",
-						children: [
-							/* @__PURE__ */ jsx("h2", { children: "Visitor pass" }),
-							/* @__PURE__ */ jsxs("div", {
-								className: "field-row",
-								children: [/* @__PURE__ */ jsx("label", {
-									htmlFor: "visitor-name",
-									children: "Name"
-								}), /* @__PURE__ */ jsx("input", {
-									id: "visitor-name",
-									name: "name",
-									placeholder: "Enter your name"
-								})]
-							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "field-row",
-								children: [/* @__PURE__ */ jsx("label", {
-									htmlFor: "visitor-age",
-									children: "Year"
-								}), /* @__PURE__ */ jsx("input", {
-									id: "visitor-age",
-									name: "year",
-									type: "number",
-									min: "2005",
-									max: "2023",
-									required: true,
-									placeholder: "2023"
-								})]
-							}),
-							/* @__PURE__ */ jsx("button", {
-								type: "submit",
-								children: "Submit"
-							})
-						]
-					}), /* @__PURE__ */ jsxs("div", {
-						className: "panel spotlight-panel",
-						children: [
-							/* @__PURE__ */ jsx("h2", { children: "Featured pick" }),
-							/* @__PURE__ */ jsx("p", {
-								className: "spotlight-title",
-								children: findMovie.title
-							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "meta-line",
-								children: [/* @__PURE__ */ jsx("span", { children: "Search result" }), /* @__PURE__ */ jsx("span", { children: findMovie.title })]
-							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "meta-line",
-								children: [/* @__PURE__ */ jsx("span", { children: "Above 8.0" }), /* @__PURE__ */ jsx("span", { children: above8.length })]
-							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "meta-line",
-								children: [/* @__PURE__ */ jsx("span", { children: "Letter O" }), /* @__PURE__ */ jsx("span", { children: oNames.length })]
-							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "meta-line",
-								children: [/* @__PURE__ */ jsx("span", { children: "Letter A" }), /* @__PURE__ */ jsx("span", { children: aNames.length })]
-							})
-						]
-					})]
-				}),
-				/* @__PURE__ */ jsxs("div", {
-					className: "panel selector-panel",
-					children: [/* @__PURE__ */ jsxs("div", {
-						className: "selector-head",
-						children: [/* @__PURE__ */ jsx("h2", { children: "Movie spotlight" }), /* @__PURE__ */ jsxs("div", {
-							className: "select-wrap",
-							children: [/* @__PURE__ */ jsx("label", {
-								htmlFor: "movie-select",
-								children: "Pick a title"
-							}), /* @__PURE__ */ jsx("select", {
-								id: "movie-select",
-								value: selectedName,
-								onChange: handleNameChange,
-								children: movies.map((movie) => /* @__PURE__ */ jsx("option", {
-									value: movie.title,
-									children: movie.title
-								}, movie.title))
-							})]
-						})]
-					}), /* @__PURE__ */ jsxs("div", {
-						className: "selected-details",
-						children: [
-							/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("span", { children: "Selected year" }), /* @__PURE__ */ jsx("strong", { children: selectedMovie.year })] }),
-							/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("span", { children: "Selected rating" }), /* @__PURE__ */ jsx("strong", { children: selectedMovie.rating })] }),
-							/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("span", { children: "Director" }), /* @__PURE__ */ jsx("strong", { children: selectedMovie.director })] })
-						]
-					})]
-				}),
-				/* @__PURE__ */ jsx("div", {
-					className: "table-wrap panel",
-					children: /* @__PURE__ */ jsxs("table", { children: [/* @__PURE__ */ jsx("thead", { children: /* @__PURE__ */ jsxs("tr", { children: [
-						/* @__PURE__ */ jsx("th", { children: "Title" }),
-						/* @__PURE__ */ jsx("th", { children: "Year" }),
-						/* @__PURE__ */ jsx("th", { children: "Rating" })
-					] }) }), /* @__PURE__ */ jsx("tbody", { children: movies.map((movie, loop) => /* @__PURE__ */ jsxs("tr", { children: [
-						/* @__PURE__ */ jsx("td", { children: movie.title }),
-						/* @__PURE__ */ jsx("td", { children: movie.year }),
-						/* @__PURE__ */ jsx("td", { children: movie.rating })
-					] }, loop)) })] })
+		children: [
+			/* @__PURE__ */ jsx("div", {
+				className: "logo-container",
+				children: /* @__PURE__ */ jsx("img", {
+					src: logo_default,
+					className: "app-logo",
+					alt: "RODS"
 				})
-			]
-		})
+			}),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+				htmlFor: "visitor-name",
+				children: "Name: "
+			}), /* @__PURE__ */ jsx("input", {
+				id: "visitor-name",
+				name: "name"
+			})] }),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+				htmlFor: "visitor-year",
+				children: "Year:"
+			}), /* @__PURE__ */ jsx("input", {
+				id: "visitor-year",
+				name: "year",
+				type: "number",
+				min: "2005",
+				max: "2023",
+				required: true
+			})] }),
+			/* @__PURE__ */ jsx("br", {}),
+			/* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("button", {
+				type: "submit",
+				children: "Submit"
+			}) }),
+			/* @__PURE__ */ jsx("br", {}),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Search by title results: " }), findMovie.title] }),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Number of movies with rating above 8.0: " }), above8.length] }),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Number of titles with the letter O: " }), oNames.length] }),
+			/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Number of titles with the letter A: " }), aNames.length] }),
+			/* @__PURE__ */ jsx("br", {}),
+			/* @__PURE__ */ jsxs("div", {
+				className: "selector-card",
+				children: [/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", {
+					htmlFor: "movie-select",
+					children: "People: "
+				}), /* @__PURE__ */ jsx("select", {
+					id: "movie-select",
+					value: selectedName,
+					onChange: handleNameChange,
+					children: movies.map((m) => /* @__PURE__ */ jsx("option", {
+						value: m.title,
+						children: m.title
+					}, m.title))
+				})] }), /* @__PURE__ */ jsxs("div", {
+					className: "selected-summary",
+					children: [/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Selected Year: " }), movies.find((m) => m.title === selectedName)?.year] }), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("label", { children: "Selected Rating: " }), movies.find((m) => m.title === selectedName)?.rating] })]
+				})]
+			}),
+			/* @__PURE__ */ jsx("br", {}),
+			/* @__PURE__ */ jsx("div", {
+				className: "table-wrap",
+				children: /* @__PURE__ */ jsxs("table", { children: [/* @__PURE__ */ jsx("thead", { children: /* @__PURE__ */ jsxs("tr", { children: [
+					/* @__PURE__ */ jsx("th", { children: "Title" }),
+					/* @__PURE__ */ jsx("th", { children: "Year" }),
+					/* @__PURE__ */ jsx("th", { children: "Rating" })
+				] }) }), /* @__PURE__ */ jsx("tbody", { children: movies.map((movie, loop) => /* @__PURE__ */ jsxs("tr", { children: [
+					/* @__PURE__ */ jsx("td", { children: movie.title }),
+					/* @__PURE__ */ jsx("td", { children: movie.year }),
+					/* @__PURE__ */ jsx("td", { children: movie.rating })
+				] }, loop)) })] })
+			})
+		]
 	});
 }
 var Movie = class {
